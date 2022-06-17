@@ -1,0 +1,14 @@
+{
+    "name": "lc387_non_linear_data_structures",
+    "version": "0.1.0",
+    "description": "Aplicación para la clase en vivo de estructuras no lineales en JavaScript",
+    "main": "index.js",
+    "scripts": {
+        "start": "node src/index.js"
+    },
+    "keywords": [
+        "non-linear", "structures"
+    ],
+    "author": "Juan Pablo Garcia (@juanpagfe)",
+    "license": "MIT"
+}
