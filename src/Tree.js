@@ -1,31 +1,42 @@
 const TreeNode = require('./TreeNode')
 
-class Tree {
-    constructor(key, value = key) {
+class Tree
+{
+    constructor(key, value = key)
+    {
         this.root = new TreeNode(key, value);
     }
 
-    *preOrderTraversal(node = this.root) {
+    *preOrderTraversal(node = this.root)
+    {
         yield node;
-        if (node.children.length) {
-            for (let child of node.children) {
+        if (node.children.length)
+        {
+            for (let child of node.children)
+            {
                 yield* this.preOrderTraversal(child);
             }
         }
     }
 
-    *postOrderTraversal(node = this.root) {
-        if (node.children.length) {
-            for (let child of node.children) {
+    *postOrderTraversal(node = this.root)
+    {
+        if (node.children.length)
+        {
+            for (let child of node.children)
+            {
                 yield* this.postOrderTraversal(child);
             }
         }
         yield node;
     }
 
-    insert(parentNodeKey, key, value = key) {
-        for (let node of this.preOrderTraversal()) {
-            if (node.key === parentNodeKey) {
+    insert(parentNodeKey, key, value = key)
+    {
+        for (let node of this.preOrderTraversal())
+        {
+            if (node.key === parentNodeKey)
+            {
                 node.children.push(new TreeNode(key, value, node));
                 return true;
             }
@@ -33,10 +44,13 @@ class Tree {
         return false;
     }
 
-    remove(key) {
-        for (let node of this.preOrderTraversal()) {
+    remove(key)
+    {
+        for (let node of this.preOrderTraversal())
+        {
             const filtered = node.children.filter(c => c.key !== key);
-            if (filtered.length !== node.children.length) {
+            if (filtered.length !== node.children.length)
+            {
                 node.children = filtered;
                 return true;
             }
@@ -44,11 +58,32 @@ class Tree {
         return false;
     }
 
-    find(key) {
-        for (let node of this.preOrderTraversal()) {
+    find(key)
+    {
+        for (let node of this.preOrderTraversal())
+        {
             if (node.key === key) return node;
         }
         return undefined;
+    }
+
+    parseNode(node)
+    {
+        let result = {}
+        result[node.key] = []
+        if (node.hasChildren)
+        {
+            for (const child of node.children)
+            {
+                result[node.key].push(this.parseNode(child))
+            }
+        }
+        return result
+    }
+
+    toObject()
+    {
+        return this.parseNode(this.root)
     }
 }
 

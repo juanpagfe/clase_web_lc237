@@ -1,5 +1,4 @@
 const Tree = require('./Tree')
-const TreeNode = require('./TreeNode')
 const Graph = require('./Graph')
 
 
@@ -10,6 +9,8 @@ const tree = new Tree(1, 'A');
 tree.insert(1, 11, 'B');
 tree.insert(1, 12, 'C');
 tree.insert(12, 121, 'D');
+
+console.log("Tree: ", JSON.stringify(tree.toObject(), null, 2));
 
 console.log("PreOrder: ", [...tree.preOrderTraversal()].map(x => x.value));
 
